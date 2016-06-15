@@ -1,11 +1,7 @@
-<nav>
-	<ul>
-		<li>
-			<ul>
-				<li><a href="?c=1&a=2">Item1</a></li>
-				<li></li>
-				<li></li>
-			</ul>
-		</li>
-	</ul>
-</nav>
+<?php if(!($lang = getBlockVariables('nav'))) echo 'Error'; ?>
+<div class="flex fw-contianer">
+	<nav>
+		<div class="nav-item flex-item main-item"><?php echo $lang['item1']; ?></div>
+		<div class="nav-item flex-item main-item"><?php echo $lang['item2']; ?></div>
+	</nav>
+</div>

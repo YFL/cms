@@ -2,12 +2,12 @@
 	session_start();
 	require_once('modules/language-selector/selector.php');
 	setLanguage();
-	if(!getBlockVariables('header')) echo 'Error';
+	if(!($lang = getBlockVariables('header'))) echo 'Error';
 ?>
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>CMS <?php echo $title; ?></title>
+		<title>CMS <?php echo $lang['title']; ?></title>
 		<link type="text/css" href="styles/<?php if(isset($_GET['style'])) echo $_GET['style'].'css'; else echo 'style.css'; ?>" rel="stylesheet">
 		<script type="text/javascript" src="js/js.js"></script>
 	</head>

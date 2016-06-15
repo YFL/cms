@@ -1,4 +1,6 @@
 <?php
-	$title = 'home';
-	$h_title = 'CMS';
+	$lang = [
+		'title' => 'home',
+		'h_title' => 'CMS'
+	];
 ?>

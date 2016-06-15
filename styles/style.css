@@ -1,0 +1,47 @@
+*{margin: 0; padding: 0; border: 0;}
+
+ul{
+	list-style-type: none;
+}
+
+.flex, .flex-item{
+	display: flex;
+}
+
+.flex-item{
+	flex: 1;
+}
+
+.fw-container{
+	width: 100%;
+	justify-content: space-between;
+	border: 1px solid green;
+}
+
+.container
+{
+	width: 1200px;
+	margin: 0 auto;
+	justify-content: space-between;
+	border: 1px solid pink;
+}
+
+.onethird-col{
+	width: 33.3333%;
+	border: 1px solid yellow;
+}
+
+.twothird-col{
+	width: 66.6667%;
+}
+
+.half-col{
+	flex: 1;
+	border: 1px solid salmon;
+}
+
+nav{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}

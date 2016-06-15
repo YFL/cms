@@ -1,3 +1,7 @@
 <?php
-	$item1 = 'item';
+	$lang =
+	[
+		'item1' =>'Item1',
+		'item2' => 'ItemFuck'
+	];
 ?>
