@@ -9,6 +9,8 @@
 	<head>
 		<title>CMS <?php echo $lang['title']; ?></title>
 		<link type="text/css" href="styles/<?php if(isset($_GET['style'])) echo $_GET['style'].'css'; else echo 'style.css'; ?>" rel="stylesheet">
+		<script type="text/javascript" src="js/jquery-3.0.0.js"></script>
+		<script type="text/javascript" src="js/plug-ins/roll-down-nav.js"></script>
 		<script type="text/javascript" src="js/js.js"></script>
 	</head>
 	<body>
