@@ -1,6 +1,7 @@
 var DropDownItem = function(name)
 {
 	this.name = name;
+	this.visible = 0;
 }
 
 var NavItem = function(name, child)
@@ -20,10 +21,24 @@ var Nav = function()
 	}
 	this.rollDown = function(name)
 	{
-		$('#'+this.mainItems[name].dropDown).slideDown();
+		var i;
+		for(i in this.mainItems)
+		{
+			if(this.mainItems[i].name === name) break;
+		}
+		if(this.mainItems[i].name != name) return;
+		var control = $('#'+this.mainItems[i].dropDown.name);
+		control.slideDown("slow", function(){control.css("display", "flex");});
 	}
 	this.rollUp = function(name)
 	{
-		$('#'+this.mainItems[name].dropDown).slideUp();
+		var i;
+		for(i in this.mainItems)
+		{
+			if(this.mainItems[i].name === name) break;
+		}
+		if(this.mainItems[i].name != name) return;
+		var control = $('#'+this.mainItems[i].dropDown.name);
+		control.slideUp("slow");
 	}
 }
