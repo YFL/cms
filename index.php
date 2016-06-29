@@ -1,5 +1,5 @@
 <?php
-	session_start();
+	
 	require_once('modules/language-selector/selector.php');
 	setLanguage();
 	if(!($lang = getBlockVariables('header'))) echo 'Error';

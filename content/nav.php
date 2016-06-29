@@ -1,5 +1,5 @@
 <?php if(!($lang = getBlockVariables('nav'))) echo 'Error'; ?>
-<div class="flex fw-contianer">
+<div class="flex fw-contianer nav-container">
 	<nav>
 		<div id="item1" class="nav-item flex-item main-item"><?php echo $lang['item1']; ?></div>
 		<div id="item2" class="nav-item flex-item main-item"><a href="?c=content"><?php echo $lang['item2']; ?></a></div>
