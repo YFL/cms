@@ -36,7 +36,7 @@
 		{
 			$char = substr($str[1], $i, 1);
 			if($char == '.') $dot = true;
-			if($i == $len - 1 && ($char == '.' || $char == '-' || $char == '_') return 0;
+			if($i == $len - 1 && ($char == '.' || $char == '-' || $char == '_')) return 0;
 		}
 		if($dot) return 1;
 	}
