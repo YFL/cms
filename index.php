@@ -1,5 +1,5 @@
 <?php
-	
+
 	require_once('modules/language-selector/selector.php');
 	setLanguage();
 	if(!($lang = getBlockVariables('header'))) echo 'Error';
@@ -12,6 +12,7 @@
 		<script type="text/javascript" src="js/jquery-3.0.0.js"></script>
 		<script type="text/javascript" src="js/plug-ins/roll-down-nav.js"></script>
 		<script type="text/javascript" src="js/js.js"></script>
+		<script type="text/javascript" src="js/register.js"></script>
 	</head>
 	<body>
 		<?php
