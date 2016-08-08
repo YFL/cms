@@ -1,39 +1,45 @@
-$('window').on("load", function()
+var ajaxRegister = function(e)
 {
-	$('#regform').submit(function(e)
-	{
-		var data = $('#regform').serialize();
-		$.ajax(
+	var data = $('#regform').serialize();
+	$.ajax(
+		{
+			type: 'POST',
+			data: data,
+			dataType: 'JSON',
+			url: 'modules/register.php',
+			success: function(data)
 			{
-				type: 'POST',
-				data: data,
-				dataType: 'JSON',
-				url: 'register.php',
-				success: function(data)
+				$('#success').text( 'Broki');
+				console.log('madafak');
+				console.log(data);
+				if(typeof(data) !== "string")
 				{
-					try
-					{
-						var dat = JSON.parse(data);
-						var keys = Object.getOwnPropertyNames(dat);
-						for (var error in keys) {
-							{
-								$('#'+keys[error]).fadeIn(1000);
-								$('#'+keys[error]).html(dat[keys[error]]);
-							}
+					$("#success").html("some value");
+					console.log('hola');
+					var keys = Object.getOwnPropertyNames(data);
+					for (var error in keys) {
+						{
+							console.log(keys[error]);
+							//$('#'+keys[error]).fadeIn(1000);
+							$('#'+keys[error]).html(data[keys[error]]);
 						}
 					}
-					catch (e)
-					{
-						$('#success').html(data);
-					}
-				},
-				error: function(a, b, c)
-				{
-					alert('Server-side failure: '+a+' '+b+' '+c);
 				}
+				else //(er)
+				{
+					console.log('ratyi');
+					$('#success').html(data);
+				}
+			},
+			error: function(a, b, c)
+			{
+				alert('Server-side failure: '+a+' '+b+' '+c);
+				console.log(a);
+				console.log(b);
+				console.log(c);
 			}
-		);
-		e.preventDefault();
-    return false;
-	});
-});
+		}
+	);
+	e.preventDefault();
+  return false;
+}

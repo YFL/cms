@@ -1,5 +1,4 @@
 <?php
-	echo getcwd();
 	require_once('language-selector/selector.php');
 	if(!($lang = getBlockVariables('reg'))) echo 'Error';
 	$result = [];
