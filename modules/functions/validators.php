@@ -1,4 +1,16 @@
 <?php
+	function usernameCheck($str)
+	{
+		$i = 0;
+		$len = strlen($str);
+		for($i; $i < $len; $i++)
+		{
+			$char = substr($str, $i, 1);
+			if(!ctype_upper($char) && !ctype_lower($char) && !is_numeric($char) && $char != '_') return false;
+		}
+		return true;
+	}
+
 	function passCheck($str)
 	{
 		$i = 0;

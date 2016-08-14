@@ -1,4 +1,5 @@
 <?php
+	require_once('connection.php');
 	require_once('language-selector/selector.php');
 	if(!($lang = getBlockVariables('reg'))) echo 'Error';
 	$result = [];
@@ -23,11 +24,17 @@
 	else
 	{
 		if(!checkUserInput($username)) $result['username'] = $lang['invalid_ui_e'];
-		if(!preg_match('/^[a-zA-Z0-9_]+?/', $username));
+		else if(!usernameCheck($username))
 		{
 			$result['username'] =  $lang['bad_uname_e'];
 		}
-
+		else
+		{
+			$qry = "SELECT * FROM 'users' WHERE 'username' = $username";
+			$stmt = $mysqli->query("SELECT * FROM users WHERE username='$username'");
+			if($stmt->num_rows > 0) $result['username'] = $lang['existing_username_e'];
+			$stmt->close();
+		}
 	}
 	if(empty($password))
 	{
@@ -56,6 +63,10 @@
 		if(!checkUserInput($email)) $result['email'] = $lang['invalid_ui_e'];
 		$check = emailCheck($email);
 		if($check == 0) $result['email'] = $lang['invalid_email_e'];
+		$qry = "SELECT * FROM users WHERE email = '$email'";
+		$stmt = $mysqli->query($qry);
+		if($stmt->num_rows > 0) $result['email'] = $lang['existing_email_e'];
+		$stmt->close();
 	}
 	if(!empty($result))
 	{
@@ -65,17 +76,15 @@
 
 //----------Registration----------//
 
-	require_once('modules/connection.php');
 	$password = password_hash($password, PASSWORD_BCRYPT);
-	$link = $mysqli->query("INSERT INTO 'users' ('username', 'email', 'password') VALUES ($username, $email, $password)");
+	$date = date("r");
+	$link = $mysqli->query("INSERT INTO users (username, email, password, reg_date) VALUES ('$username', '$email', '$password', '$date')");
 	if(!$link)
 	{
-		$link->close();
 		$mysqli->close();
 		echo 'Query failed';
 		exit();
 	}
-	$link->close();
 	$mysqli->close();
 
 	echo 'Successful registration!<br>';

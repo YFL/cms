@@ -15,6 +15,8 @@
 		'short_pass_e' => 'Password too short!',
 		'invalid_pass_e' => 'Password must contain lowercase letters, uppercase letters and numbers at least one of each!',
 		'invalid_ui_e' => 'Invalid input. Only alphanumeric signs and ~, !, @, #, $, %, ^, &, *, (, ), -, _, =, +, ., ?, | characters accepted!',
-		'email_w' => 'Are you sure your eamil is correct?'
+		'email_w' => 'Are you sure your eamil is correct?',
+		'existing_username_e' => 'The username is already taken. Please select another one.',
+		'existing_email_e' => 'The email is already taken. You can have only one account with a specific email address.'
 	]
 ?>

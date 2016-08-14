@@ -5,16 +5,14 @@ var ajaxRegister = function(e)
 		{
 			type: 'POST',
 			data: data,
-			dataType: 'JSON',
 			url: 'modules/register.php',
 			success: function(data)
 			{
-				$('#success').text( 'Broki');
+				$('.error').text('');
 				console.log('madafak');
 				console.log(data);
 				if(typeof(data) !== "string")
 				{
-					$("#success").html("some value");
 					console.log('hola');
 					var keys = Object.getOwnPropertyNames(data);
 					for (var error in keys) {
@@ -31,9 +29,9 @@ var ajaxRegister = function(e)
 					$('#success').html(data);
 				}
 			},
-			error: function(a, b, c)
+			error: function(a, b, c, d)
 			{
-				alert('Server-side failure: '+a+' '+b+' '+c);
+				alert('Server-side failure: '+a+' '+b+' '+c+' '+d);
 				console.log(a);
 				console.log(b);
 				console.log(c);
