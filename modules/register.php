@@ -23,7 +23,8 @@
 	}
 	else
 	{
-		if(!checkUserInput($username)) $result['username'] = $lang['invalid_ui_e'];
+		if(strlen($username) > 32) $result['username'] = $lang['uname_long_e'];
+		else if(!checkUserInput($username)) $result['username'] = $lang['invalid_ui_e'];
 		else if(!usernameCheck($username))
 		{
 			$result['username'] =  $lang['bad_uname_e'];
@@ -42,6 +43,7 @@
 	}
 	else
 	{
+		if(strlen($password) > 32) $result['password'] = $lang['password_long_e'];
 		if(strlen($password) < 8) $result['password'] = $lang['short_pass_e'];
 		if(!checkUserInput($password)) $result['password'] = $lang['invalid_ui_e'];
 		if(!passCheck($password)) $result['password'] = $lang['invalid_pass_e'];
@@ -60,6 +62,7 @@
 	}
 	else
 	{
+		if(strlen($email) > 64) $result['email'] = $lang['email_long_e'];
 		if(!checkUserInput($email)) $result['email'] = $lang['invalid_ui_e'];
 		$check = emailCheck($email);
 		if($check == 0) $result['email'] = $lang['invalid_email_e'];

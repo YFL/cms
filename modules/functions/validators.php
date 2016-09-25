@@ -24,6 +24,7 @@
 			if(ctype_upper($char)) $uC = true;
 			if(ctype_lower($char)) $lC = true;
 			if(is_numeric($char)) $n = true;
+			if($char == '/' || $char == '\\') return false;
 		}
 		if($lC && $uC && $n) return true;
 		return false;

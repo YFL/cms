@@ -16,7 +16,6 @@ ul{
 	width: 100%;
 	padding: 0 15px;
 	justify-content: space-between;
-	border: 1px solid green;
 }
 
 .container
@@ -24,20 +23,20 @@ ul{
 	width: 1200px;
 	margin: 0 auto;
 	justify-content: space-between;
-	border: 1px solid pink;
 }
 
 .onethird-col{
 	width: 33.3333%;
-	border: 1px solid yellow;
 }
 
 .twothird-col{
 	width: 66.6667%;
-	border: 1px solid purple;
 }
 
 .half-col{
 	flex: 1;
-	border: 1px solid salmon;
+}
+
+.center {
+	margin: 0 auto;
 }

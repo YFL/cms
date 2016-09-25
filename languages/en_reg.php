@@ -17,6 +17,9 @@
 		'invalid_ui_e' => 'Invalid input. Only alphanumeric signs and ~, !, @, #, $, %, ^, &, *, (, ), -, _, =, +, ., ?, | characters accepted!',
 		'email_w' => 'Are you sure your eamil is correct?',
 		'existing_username_e' => 'The username is already taken. Please select another one.',
-		'existing_email_e' => 'The email is already taken. You can have only one account with a specific email address.'
+		'existing_email_e' => 'The email is already taken. You can have only one account with a specific email address.',
+		'uname_long_e' => 'The username you have entered is too long.',
+		'password_long_e' => 'The password you have entered is too long',
+		'email_long_e' => 'The email you have entered is too long'
 	]
 ?>

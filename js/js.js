@@ -8,4 +8,5 @@ window.onload = function()
 	//----------Register----------//
 
 	$('#regform').submit(ajaxRegister);
+	$('#loginform').submit(ajaxLogIn);
 }

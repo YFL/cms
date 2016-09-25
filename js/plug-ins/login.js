@@ -1,16 +1,17 @@
-var ajaxRegister = function(e)
+var ajaxLogIn = function(e)
 {
-	var data = $('#regform').serialize();
+	var data = $('#loginform').serialize();
 	$.ajax(
 		{
 			type: 'POST',
 			data: data,
-			url: 'modules/register.php',
+			url: 'modules/login.php',
 			success: function(data)
 			{
 				$('.error').text('');
 				console.log('madafak');
 				console.log(data);
+				console.log(typeof(data));
 				var first = data.charAt(0);
 				if(first === '{')
 				{
@@ -27,6 +28,10 @@ var ajaxRegister = function(e)
 				{
 					console.log('ratyi');
 					$('#success').html(data);
+					setTimeout(function()
+					{
+						window.location.href = 'index.php?c=profile';
+					}, 3000);
 				}
 			},
 			error: function(a, b, c, d)
