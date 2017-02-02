@@ -4,4 +4,9 @@ window.onload = function()
 	navigation.addMainItem('item1', 'dd1');
 	$('.nav-item').click(function(){navigation.onclick(this.id);});
 
+
+	//----------Register----------//
+
+	$('#regform').submit(ajaxRegister);
+	$('#loginform').submit(ajaxLogIn);
 }
