@@ -1,4 +1,16 @@
 <?php
+	function usernameCheck($str)
+	{
+		$i = 0;
+		$len = strlen($str);
+		for($i; $i < $len; $i++)
+		{
+			$char = substr($str, $i, 1);
+			if(!ctype_upper($char) && !ctype_lower($char) && !is_numeric($char) && $char != '_') return false;
+		}
+		return true;
+	}
+
 	function passCheck($str)
 	{
 		$i = 0;
@@ -12,6 +24,7 @@
 			if(ctype_upper($char)) $uC = true;
 			if(ctype_lower($char)) $lC = true;
 			if(is_numeric($char)) $n = true;
+			if($char == '/' || $char == '\\') return false;
 		}
 		if($lC && $uC && $n) return true;
 		return false;
@@ -26,20 +39,17 @@
 		$str = explode('@', $email);
 		if(count($str) != 2) return 0;
 		$len = strlen($str[0]);
-
 		for($i; $i < $len; $i++)
 		{
 			$char = substr($str[0], $i, 1);
 			if($i == $len - 1 && ($char == '.' || $char == '-' || $char == '_')) return -1;
 		}
-
-
 		$len = strlen($str[1]);
 		for($i = 0; $i < $len; $i++)
 		{
 			$char = substr($str[1], $i, 1);
 			if($char == '.') $dot = true;
-			if($i == ($len - 1) && ($char == '.' || $char == '-' || $char == '_')) return 0;
+			if($i == $len - 1 && ($char == '.' || $char == '-' || $char == '_')) return 0;
 		}
 		if($dot) return 1;
 	}

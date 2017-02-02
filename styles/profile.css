@@ -1,0 +1,15 @@
+#profile-wrapper {
+	background-color: steelblue;
+	border-radius: 5px;
+	padding: 20px;
+}
+
+#profile-core {
+	background-color: aliceblue;
+	border-radius: 5px;
+	flex-direction: column;
+}
+
+#profile-body {
+	padding: 5px;
+}
