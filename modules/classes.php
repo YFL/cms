@@ -1,8 +1,10 @@
 <?php
-
+	$lang = "";
 	require_once('connection.php');
 	require_once('language-selector/selector.php');
-	if(!($lang = getBlockVariables('reg'))) echo 'Error';
+	if(!($lang = getBlockVariables('reg'))) {
+		die('Error');
+	}
 	require_once('functions/validators.php');
 	require_once('functions/security.php');
 
@@ -28,12 +30,15 @@
 
 		public function checkData() {
 			$result = [];
+
+			/* Checking POST */
 			if(!isset($_POST))
 			{
 				$result['error'] = $lang['e'];
 				return $result;
 			}
 
+			/* Checking Username */
 			if(empty($username))
 			{
 				$result['username'] = $lang['uname_empty_e'];
@@ -49,11 +54,13 @@
 				else
 				{
 					$stmt = $pdo->prepare('SELECT * FROM users WHERE username= :username');
-					$pdo->execute(array(':username' => $username));
+					$stmt->execute(array(':username' => $username));
 					if($stmt->rowCount() > 0) $result['username'] = $lang['existing_username_e'];
 					$stmt = null;
 				}
 			}
+
+			/* Checking Password */
 			if(empty($password))
 			{
 				$result['password'] = $lang['pass_empty_e'];
@@ -66,6 +73,8 @@
 				if(!passCheck($password)) $result['password'] = $lang['invalid_pass_e'];
 			}
 			if($pwdverify !== $password) $result['pwdverify'] = $lang['no_match_e'];
+
+			/* Checking Email */
 			if(empty($email))
 			{
 				$result['email'] = $lang['mail_empty_e'];
@@ -86,7 +95,8 @@
 					}
 				}
 			}
-			if(!empty($result))
+
+			if(!empty($result)) // If there were errors, return them
 			{
 				return $result;
 			}
@@ -96,7 +106,35 @@
 		}
 
 		public function register() {
-			$stmt = $pdo->prepare('INSERT INTO ')
+			if(($username !== "") && ($password !== "") && ($email !== "")) {
+				$stmt = null;
+				try {
+					$stmt = $pdo->prepare('INSERT INTO users (username, email, password, reg_date) VALUES (:name, :email, :password, :reg_date)');
+					if($stmt !== null) {
+						try {
+							//$retVal = $stmt->execute(array(':name' => $name, ':email'->$email, ':password' => $password, date('jS \of F Y h:i:s A')));
+							if(!$retVal) {
+								throw new Exception('Execute failed!');
+							}
+							else {
+								$stmt = null;
+								$pdo = null;
+								sleep(60);
+								return true;
+							}
+						}
+						catch(Exception $e) {
+							echo 'Failed to register!<br>';
+							return false;
+						}
+					}
+				}
+				catch(PDOException $e) {
+					echo 'Couldn\'t prepare statement! PDOException Message: '.$e->message;
+					return false;
+				}
+			}
+			return false;
 		}
 
 		private $username;
