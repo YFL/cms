@@ -8,12 +8,18 @@
 
 //----------Validation & Registration----------//
 	$user = new RegisteringUser($username, $password, $pwdverify, $email);
-	if($user->checkData()) {
+	$result = $user->checkData();
+	if($result === true) {
+		$user->hashPassword();
 		if($user->register()) {
 			echo 'Successful registration!<br>';
 		}
-		else echo 'Registration failed!<br>';
+		else {
+			echo 'Registration Failed on Last moment!';
+		}
+	}
+	else {
+		echo $result;
 	}
 
-	echo 'Successful registration!<br>';
 ?>

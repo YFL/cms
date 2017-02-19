@@ -1,17 +1,18 @@
 var ajaxLogIn = function(e)
 {
 	var data = $('#loginform').serialize();
+	var url = 'modules/login.php';
 	$.ajax(
 		{
 			type: 'POST',
 			data: data,
-			url: 'modules/login.php',
+			url: url,
 			success: function(data)
 			{
 				$('.error').text('');
-				console.log('madafak');
-				console.log(data);
-				console.log(typeof(data));
+				//console.log('madafak');
+				//console.log(data);
+				//console.log(typeof(data));
 				var first = data.charAt(0);
 				if(first === '{')
 				{
@@ -26,7 +27,7 @@ var ajaxLogIn = function(e)
 				}
 				else //(er)
 				{
-					console.log('ratyi');
+					//console.log('ratyi');
 					$('#success').html(data);
 					setTimeout(function()
 					{

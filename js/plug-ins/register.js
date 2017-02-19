@@ -1,15 +1,16 @@
 var ajaxRegister = function(e)
 {
+	var url = 'modules/register.php';
 	var data = $('#regform').serialize();
 	$.ajax(
 		{
 			type: 'POST',
 			data: data,
-			url: 'modules/register.php',
+			url: url,
 			success: function(data)
 			{
 				$('.error').text('');
-				console.log('madafak');
+				//console.log('madafak');
 				console.log(data);
 				var first = data.charAt(0);
 				if(first === '{')
@@ -25,7 +26,7 @@ var ajaxRegister = function(e)
 				}
 				else //(er)
 				{
-					console.log('ratyi');
+					//console.log('ratyi');
 					$('#success').html(data);
 				}
 			},
