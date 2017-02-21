@@ -1,10 +1,6 @@
 <?php
-	$lang = "";
 	require_once('connection.php');
 	require_once('language-selector/selector.php');
-	if(!($lang = getBlockVariables('reg'))) {
-		die('Error');
-	}
 	require_once('functions/validators.php');
 	require_once('functions/security.php');
 
@@ -30,14 +26,10 @@
 
 		public function checkData() {
 			$result = [];
-			global $lang;
-			global $pdo;
-			/* Checking POST */
-			if(!isset($_POST))
-			{
-				$result['error'] = $lang['e'];
-				return $result;
+			if(!($lang = getBlockVariables('reg'))) {
+				die('Error');
 			}
+			global $pdo;
 
 			/* Checking Username */
 			if(empty($this->name))
@@ -145,5 +137,75 @@
 		private $password;
 		private $pwdverify;
 		private $email;
+	}
+
+
+	class LoginHandler {
+		public function __construct($username, $password) {
+			if(is_string($username)) {
+				$this->name = (string)$username;
+			}
+			if(is_string($password)) {
+				$this->password = (string)$password;
+			}
+		}
+
+		public function checkData() {
+			$result = array();
+			global $pdo;
+			if(!($lang = getBlockVariables('login'))) die('Error');
+			if(!empty($this->name) && !empty($this->password))
+			{
+				if(!checkUserInput($this->name) || !checkUserInput($this->password)) $result['username'] = $lang['invalid_ui_e'];
+				else
+				{
+					$qry = "SELECT * FROM users WHERE username = :username";
+					$stmt = $pdo->prepare($qry);
+					$stmt->execute(array(':username' => $this->name));
+					// if(!$link) $result['error'] = $lang['db_conn_e'];
+					if($stmt->rowCount() < 1) $result['error'] = $lang['bad_credentials1_e'];
+					else
+					{
+						$row = $stmt->fetch(PDO::FETCH_ASSOC);
+						$this->id = $row['id'];
+						if(!password_verify($this->password, $row['password'])) $result['error'] = $lang['bad_credentials2_e'];
+						unset($row);
+						$stmt = null;
+					}
+
+				}
+			}
+			else
+			{
+				if(empty($username)) $result['username'] = $lang['uname_empty_e'];
+				if(empty($password)) $result['password'] = $lang['pass_empty_e'];
+			}
+			if(!empty($result)) return $result;
+			return true;
+		}
+
+		public function logIn() {
+			global $pdo;
+
+			setcookie('username', $this->name, 0, "/cms");
+			setcookie('id', $this->id, 0, "/cms");
+			$date = date("jS \of F Y h:i:s A");
+			$qry = "UPDATE users SET last_login = :date WHERE username = :username";
+			$stmt = $pdo->prepare($qry);
+			$stmt->execute(array(':date' => $date, ':username' => $this->name));
+			if($stmt->rowCount() < 1)
+			{
+				setcookie('username', FALSE, time()-200000, "/cms");
+				setcookie('id', FALSE, time()-200000, "/cms");
+				return false;
+			}
+			$stmt = null;
+			$pdo = null;
+			return true;
+		}
+
+		private $id;
+		private $name;
+		private $password;
 	}
 ?>
